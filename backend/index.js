@@ -12,8 +12,8 @@ import {
   getDraftSessions,
   addDraftHistory,
   getDraftHistory,
+  db // Import the db instance from models.js
 } from './models.js';
-import Database from 'better-sqlite3';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -21,10 +21,10 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Подключение к базе (readonly только для карт)
-const db = new Database(path.join(__dirname, 'database.sqlite'));
+// Database connection is now handled by models.js
+// const db = new Database(path.join(__dirname, 'database.sqlite'));
 
-initDraftTables();
+initDraftTables(); // Initialize tables using the imported db instance
 
 app.use(cors());
 app.use(express.json());
