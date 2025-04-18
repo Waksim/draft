@@ -234,18 +234,14 @@
 }
 
 /* --- МОБИЛЬНЫЙ ФИКС: предотвращение переполнения карточек --- */
-
 @media (max-width: 576px) {
   .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-    width: 100%;
+    width: 100vw;
     box-sizing: border-box;
     overflow-x: hidden;
     margin: 0;
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding: 0;
   }
   .card-item,
   .card-button {
