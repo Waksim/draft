@@ -73,7 +73,9 @@ const WaitingRoomWrapper = styled.div`
 `;
 
 export default function PlayerWaitingRoom() {
+  console.log('PlayerWaitingRoom component initialized');
   const { draftId, playerNum } = useParams();
+  console.log('URL parameters:', { draftId, playerNum });
   const { t } = useTranslation();
   const navigate = useNavigate();
   const defaultName = `Bunny #${playerNum}`;
@@ -117,10 +119,15 @@ export default function PlayerWaitingRoom() {
   }
 
   useEffect(() => {
+    console.log('Initial useEffect for fetching sessions triggered');
     fetchSessions();
     const id = setInterval(fetchSessions, 1500);
     setIntervalId(id);
-    return () => clearInterval(id);
+    console.log('Interval set for fetching sessions, ID:', id);
+    return () => {
+      console.log('Clearing interval on component unmount');
+      clearInterval(id);
+    };
   }, [draftId]);
 
   // Имя по умолчанию
@@ -144,12 +151,42 @@ export default function PlayerWaitingRoom() {
     if (me) setReady(Boolean(me.ready));
   }, [sessions, playerNum]);
 
-  if (loading) return <div>{t('loading')}</div>;
-  if (error) return <WaitingRoomWrapper><div className="error-message">{error}</div></WaitingRoomWrapper>;
+  if (loading) return (
+    <WaitingRoomWrapper>
+      <h2>{t('loading')} ({draftId}/player/{playerNum})</h2>
+      <div>Debug loading state: {loading ? 'Still loading' : 'Loading complete'}</div>
+      <div>Sessions count: {sessions ? sessions.length : 0}</div>
+      <div>Error: {error ? error : 'No errors'}</div>
+    </WaitingRoomWrapper>
+  );
+  
+  if (error) return (
+    <WaitingRoomWrapper>
+      <h2>Error occurred</h2>
+      <div className="error-message">{error}</div>
+      <div>draftId: {draftId}, playerNum: {playerNum}</div>
+      <div>Sessions count: {sessions ? sessions.length : 0}</div>
+    </WaitingRoomWrapper>
+  );
 
   return (
     <WaitingRoomWrapper>
-      <h2>{t('waiting_room')}</h2>
+      <h2>{t('waiting_room')} - {draftId}/player/{playerNum}</h2>
+      
+      {/* Debug section - will help identify potential issues */}
+      <div style={{background: '#f5f5f5', border: '1px solid #ddd', padding: '10px', marginBottom: '20px', borderRadius: '5px'}}>
+        <h4>Debug Info:</h4>
+        <ul style={{listStyle: 'none', padding: '0'}}>
+          <li>draftId: {draftId}</li>
+          <li>playerNum: {playerNum}</li>
+          <li>Sessions count: {sessions ? sessions.length : 0}</li>
+          <li>Loading state: {loading ? 'Loading' : 'Complete'}</li>
+          <li>Error state: {error ? error : 'No errors'}</li>
+          <li>API URL: /api/drafts/{draftId}/sessions</li>
+          <li>Ready state: {ready ? 'Ready' : 'Not ready'}</li>
+        </ul>
+      </div>
+      
       <div>
         <label>
           {t('your_name')}:
@@ -164,11 +201,15 @@ export default function PlayerWaitingRoom() {
       <div className="status-list">
         <h4>{t('players_status')}:</h4>
         <ul>
-          {sessions.map(s => (
-            <li key={s.player_num}>
-              {s.name || `Bunny #${s.player_num}`} — {s.ready ? <span style={{color: 'var(--accent)'}}>{t('ready')}</span> : <span>{t('not_ready')}</span>}
-            </li>
-          ))}
+          {sessions.length > 0 ? (
+            sessions.map(s => (
+              <li key={s.player_num}>
+                {s.name || `Bunny #${s.player_num}`} — {s.ready ? <span style={{color: 'var(--accent)'}}>{t('ready')}</span> : <span>{t('not_ready')}</span>}
+              </li>
+            ))
+          ) : (
+            <li>No sessions found. Trying to create/fetch...</li>
+          )}
         </ul>
       </div>
       <div className="waiting-text">{t('waiting_for_all_ready')}</div>
