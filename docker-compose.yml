@@ -6,6 +6,8 @@ services:
       - "3001:3001"
     environment:
       - NODE_ENV=development
+    volumes:
+      - db_data:/app/data
     restart: unless-stopped
   frontend:
     build: ./frontend
@@ -19,3 +21,6 @@ services:
     ports:
       - "6379:6379"
     restart: unless-stopped
+
+volumes:
+  db_data:

@@ -3,9 +3,14 @@ import path from 'path';
 import Database from 'better-sqlite3';
 import crypto from 'crypto';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const db = new Database(path.join(__dirname, 'database.sqlite'));
+// Define the persistent data directory path within the container
+const dataDir = '/app/data'; 
+// Ensure the directory exists (although Docker volume mount often handles this)
+// In a real app, you might add fs.mkdirSync(dataDir, { recursive: true }); here
+// but it's likely unnecessary with Docker named volumes.
+
+const dbPath = path.join(dataDir, 'database.sqlite');
+const db = new Database(dbPath);
 
 // Вспомогательная функция для генерации уникальных ссылок
 export function generateDraftLinks(draftId) {
