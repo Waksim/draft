@@ -97,6 +97,66 @@ const ConstructorWrapper = styled.div`
     color: #e53935;
     margin-top: 10px;
   }
+
+  /* Mobile-specific table styling */
+  @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+    padding: 16px;
+    table {
+        border: 0; /* Remove table border */
+    }
+
+    table thead {
+        display: none; /* Hide table header on mobile */
+    }
+
+    table tr {
+        display: block; /* Stack rows vertically */
+        margin-bottom: 16px; /* Add space between blocks */
+        border: 1px solid ${props => props.theme.tableBorderColor};
+        border-radius: 6px; /* Add rounded corners */
+        background-color: ${props => props.theme.tableRowBackground}; /* Ensure background */
+    }
+
+    table td {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-between; /* Space label and control */
+        align-items: center; /* Center items vertically */
+        padding: 8px 12px; /* Adjust padding */
+        border: none; /* Remove cell borders */
+        border-bottom: 1px solid ${props => props.theme.tableBorderColor}; /* Add separator */
+        text-align: right; /* Align control to the right */
+
+        &::before { /* Add labels using pseudo-elements */
+            content: attr(data-label); /* Get label from data attribute */
+            font-weight: 500;
+            text-align: left; /* Align label to the left */
+            margin-right: 10px; /* Space between label and control */
+        }
+        
+        &:last-child { /* Style action buttons container */
+           border-bottom: none; /* Remove last border */
+           justify-content: center; /* Center buttons */
+           padding: 12px;
+        }
+
+        td select,
+        td input {
+            width: auto; /* Allow inputs to shrink */
+            max-width: 60%; /* Prevent controls from taking full width */
+            font-size: 1rem; /* Slightly larger font for mobile */
+            padding: 8px 10px;
+        }
+        
+        td input[type="number"] {
+             max-width: 80px;
+        }
+
+        button {
+            padding: 8px 10px; /* Make buttons easier to tap */
+            font-size: 1.2rem;
+        }
+    }
+  }
 `;
 
 const CreatedLinksWrapper = styled.div`
@@ -277,23 +337,23 @@ export default function DraftConstructor({ onDraftCreated }) {
         <tbody>
           {blocks.map((b, idx) => (
             <tr key={idx}>
-              <td>{idx + 1}</td>
-              <td>
+              <td data-label="#">{idx + 1}</td>
+              <td data-label={t('type')}>
                 <select value={b.type} onChange={e => updateBlock(idx, 'type', e.target.value)}>
                   <option value="pick">{t('pick')}</option>
                   <option value="ban">{t('ban')}</option>
                 </select>
               </td>
-              <td>
+              <td data-label={t('card_type')}>
                 <select value={b.cardType} onChange={e => updateBlock(idx, 'cardType', e.target.value)}>
                   <option value="Character">{t('character')}</option>
                   <option value="Action">{t('action')}</option>
                 </select>
               </td>
-              <td>
+              <td data-label={t('count')}>
                 <input type="number" min={1} max={b.cardType === 'Character' ? 3 : 30} value={b.count} onChange={e => updateBlock(idx, 'count', Number(e.target.value) || 1)} />
               </td>
-              <td>
+              <td data-label={t('player')}>
                 <select value={b.playerNum} onChange={e => updateBlock(idx, 'playerNum', Number(e.target.value))}>
                   <option value={1}>{t('player')} 1</option>
                   <option value={2}>{t('player')} 2</option>
