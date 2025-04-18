@@ -206,6 +206,15 @@
     white-space: normal;
     overflow: hidden;
   }
+  .card-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .card-item {
+    width: auto !important;
+  }
+  .card-button {
+    width: auto !important;
+  }
 }
 .card-button.pick {
   border: 1px solid var(--border);
