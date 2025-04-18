@@ -6,7 +6,7 @@ export default function PlayerList({ sessions = [], currentPlayerNum = null, tur
       {sessions.map(s => (
         <li key={s.player_num} style={{
           fontWeight:600,
-          color: turnPlayerNum === s.player_num ? '#09f' : '#222',
+          color: turnPlayerNum === s.player_num ? '#09f' : 'var(--text)',
           borderBottom: turnPlayerNum === s.player_num ? '2px solid #09f' : 'none',
           background: currentPlayerNum === s.player_num ? '#cdefff' : 'transparent',
           borderRadius:8,
