@@ -18,6 +18,11 @@ const ConstructorWrapper = styled.div`
     margin-bottom: 1rem;
   }
 
+  .table-container {
+    overflow-x: auto; /* Enable horizontal scrolling for the table container */
+    width: 100%; /* Ensure container takes full width */
+  }
+
   table {
     width: 100%;
     margin: 12px 0;
@@ -156,6 +161,11 @@ const ConstructorWrapper = styled.div`
             font-size: 1.2rem;
         }
     }
+  }
+
+  /* Add horizontal scroll for table on screens wider than mobile but smaller than tablet */
+  @media (min-width: 577px) and (max-width: ${props => props.theme.breakpoints.tablet}) {
+     /* Styles for table scrolling handled by .table-container */
   }
 `;
 
@@ -323,51 +333,53 @@ export default function DraftConstructor({ onDraftCreated }) {
     <ConstructorWrapper>
       <button type="button" onClick={copyPresetLink} className="preset-link-button">{t('copy_preset_link')}</button>
       <h2>{t('draft_constructor')}</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>{t('type')}</th>
-            <th>{t('card_type')}</th>
-            <th>{t('count')}</th>
-            <th>{t('player')}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {blocks.map((b, idx) => (
-            <tr key={idx}>
-              <td data-label="#">{idx + 1}</td>
-              <td data-label={t('type')}>
-                <select value={b.type} onChange={e => updateBlock(idx, 'type', e.target.value)}>
-                  <option value="pick">{t('pick')}</option>
-                  <option value="ban">{t('ban')}</option>
-                </select>
-              </td>
-              <td data-label={t('card_type')}>
-                <select value={b.cardType} onChange={e => updateBlock(idx, 'cardType', e.target.value)}>
-                  <option value="Character">{t('character')}</option>
-                  <option value="Action">{t('action')}</option>
-                </select>
-              </td>
-              <td data-label={t('count')}>
-                <input type="number" min={1} max={b.cardType === 'Character' ? 3 : 30} value={b.count} onChange={e => updateBlock(idx, 'count', Number(e.target.value) || 1)} />
-              </td>
-              <td data-label={t('player')}>
-                <select value={b.playerNum} onChange={e => updateBlock(idx, 'playerNum', Number(e.target.value))}>
-                  <option value={1}>{t('player')} 1</option>
-                  <option value={2}>{t('player')} 2</option>
-                </select>
-              </td>
-              <td>
-                <button type="button" onClick={() => moveBlock(idx, -1)} disabled={idx === 0} title={t('up')}>↑</button>
-                <button type="button" onClick={() => moveBlock(idx, 1)} disabled={idx === blocks.length - 1} title={t('down')}>↓</button>
-                <button type="button" onClick={() => removeBlock(idx)} disabled={blocks.length <= 1} title={t('delete')}>✕</button>
-              </td>
+      <div className="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>{t('type')}</th>
+              <th>{t('card_type')}</th>
+              <th>{t('count')}</th>
+              <th>{t('player')}</th>
+              <th></th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {blocks.map((b, idx) => (
+              <tr key={idx}>
+                <td data-label="#">{idx + 1}</td>
+                <td data-label={t('type')}>
+                  <select value={b.type} onChange={e => updateBlock(idx, 'type', e.target.value)}>
+                    <option value="pick">{t('pick')}</option>
+                    <option value="ban">{t('ban')}</option>
+                  </select>
+                </td>
+                <td data-label={t('card_type')}>
+                  <select value={b.cardType} onChange={e => updateBlock(idx, 'cardType', e.target.value)}>
+                    <option value="Character">{t('character')}</option>
+                    <option value="Action">{t('action')}</option>
+                  </select>
+                </td>
+                <td data-label={t('count')}>
+                  <input type="number" min={1} max={b.cardType === 'Character' ? 3 : 30} value={b.count} onChange={e => updateBlock(idx, 'count', Number(e.target.value) || 1)} />
+                </td>
+                <td data-label={t('player')}>
+                  <select value={b.playerNum} onChange={e => updateBlock(idx, 'playerNum', Number(e.target.value))}>
+                    <option value={1}>{t('player')} 1</option>
+                    <option value={2}>{t('player')} 2</option>
+                  </select>
+                </td>
+                <td>
+                  <button type="button" onClick={() => moveBlock(idx, -1)} disabled={idx === 0} title={t('up')}>↑</button>
+                  <button type="button" onClick={() => moveBlock(idx, 1)} disabled={idx === blocks.length - 1} title={t('down')}>↓</button>
+                  <button type="button" onClick={() => removeBlock(idx)} disabled={blocks.length <= 1} title={t('delete')}>✕</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <button type="button" onClick={addBlock} className="add-block-button">+ {t('add_block')}</button>
       <br />
       <button onClick={createDraft} disabled={loading} className="create-draft-button">{loading ? t('creating') : t('create_draft')}</button>
