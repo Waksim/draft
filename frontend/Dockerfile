@@ -14,4 +14,4 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Если нужна кастомная конфигурация Nginx, создайте frontend/nginx.conf и раскомментируйте строку ниже
 # COPY nginx.conf /etc/nginx/conf.d/default.conf 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"] # Запускаем Nginx
+CMD nginx -g 'daemon off;' # Используем shell form
