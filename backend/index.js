@@ -14,6 +14,7 @@ import {
   getDraftHistory,
 } from './models.js';
 import Database from 'better-sqlite3';
+import express from 'express';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
