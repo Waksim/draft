@@ -28,7 +28,7 @@ const AppHeader = styled.header`
   padding: 16px 24px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: center; 
   box-shadow: 0 2px 10px ${props => props.theme.shadow};
   position: sticky;
   top: 0;
@@ -54,7 +54,7 @@ const AppTitle = styled.h1`
 
 const HeaderControls = styled.div`
   display: flex;
-  align-items: center;
+  align-items: center; 
   gap: 20px;
   
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
@@ -215,6 +215,12 @@ const NavLink = styled(Link)`
     font-size: 1rem;
     justify-content: flex-start;
   }
+  
+  &.desktop-only-navlink {
+    @media (max-width: ${props => props.theme.breakpoints.mobile}) {
+      display: none;
+    }
+  }
 `;
 
 const MainContent = styled.main`
@@ -225,7 +231,7 @@ const MainContent = styled.main`
   padding: 32px 24px;
   
   @media (max-width: ${props => props.theme.breakpoints.mobile}) {
-    padding: 24px 16px;
+    padding: 24px 4px; /* Reduced side padding significantly for mobile */
   }
 `;
 
@@ -296,7 +302,7 @@ function App() {
                 <LanguageSwitcher />
               </LanguageSwitcherWrapper>
               
-              <NavLink to="/">
+              <NavLink to="/" className="desktop-only-navlink"> {/* Added class to hide on mobile */}
                 <FiHome /> {t('Home')}
               </NavLink>
               
