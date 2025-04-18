@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import {
+import db, { 
   initDraftTables,
   createDraft,
   getDraft,
@@ -11,8 +11,7 @@ import {
   setPlayerReady,
   getDraftSessions,
   addDraftHistory,
-  getDraftHistory,
-  db // Import the db instance from models.js
+  getDraftHistory
 } from './models.js';
 
 const __filename = fileURLToPath(import.meta.url);
