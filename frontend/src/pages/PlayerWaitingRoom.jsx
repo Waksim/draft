@@ -87,8 +87,7 @@ export default function PlayerWaitingRoom() {
   // Получить статус сессий
   async function fetchSessions() {
     try {
-      const res = await apiGet(`/api/drafts/${draftId}/sessions`);
-      const data = await res.json();
+      const data = await apiGet(`/api/drafts/${draftId}/sessions`);
       setSessions(data);
       setLoading(false);
       // Если оба готовы — переход к драфту

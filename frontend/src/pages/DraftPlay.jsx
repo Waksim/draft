@@ -220,8 +220,7 @@ export default function DraftPlay() {
       const urlType = block.cardType || 'Character';
       let url = `/api/cards?type=${urlType}`;
       if (filterTag) url += `&tag=${filterTag}`;
-      const res = await fetch(url);
-      let cards = await res.json();
+      let cards = await apiGet(url);
       cards = cards.filter(c => !exclude.includes(c.id));
       // show all available cards
       // cards = cards.sort(() => Math.random()-0.5).slice(0, 3);
