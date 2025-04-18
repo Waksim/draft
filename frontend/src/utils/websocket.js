@@ -20,10 +20,22 @@ export const createWebSocketConnection = () => {
     // 3. Make sure to route to the WebSocket endpoint directly on the host IP
     // We're connecting to the main nginx proxy which forwards to the WebSocket server
     wsUrl = `wss://${window.location.host}/draft/ws`;
+    console.log('WebSocket connecting to (prod):', wsUrl);
   } else {
     // In development, connect directly to the local WebSocket server
     wsUrl = 'ws://localhost:3002';
+    console.log('WebSocket connecting to (dev):', wsUrl);
   }
   
-  return new WebSocket(wsUrl);
+  const ws = new WebSocket(wsUrl);
+  
+  ws.onopen = () => {
+    console.log('WebSocket connected successfully to', wsUrl);
+  };
+  
+  ws.onerror = (error) => {
+    console.error('WebSocket connection error:', error);
+  };
+  
+  return ws;
 };

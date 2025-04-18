@@ -86,15 +86,19 @@ export default function PlayerWaitingRoom() {
 
   // Получить статус сессий
   async function fetchSessions() {
+    console.log('Пытаемся получить сессии для драфта:', draftId);
     try {
       const data = await apiGet(`/api/drafts/${draftId}/sessions`);
+      console.log('Получены данные сессий:', data);
       setSessions(data);
       setLoading(false);
       // Если оба готовы — переход к драфту
       if (data.length === 2 && data.every(s => s.ready)) {
-        navigate(`/draft/${draftId}/play/${playerNum}`);
+        // Важно не добавлять /draft/ в начало пути, так как BrowserRouter уже настроен с basename
+        navigate(`/${draftId}/play/${playerNum}`);
       }
     } catch (e) {
+      console.error('Ошибка при получении сессий:', e);
       setError(e.message);
     }
   }
