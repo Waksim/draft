@@ -173,19 +173,7 @@ export default function PlayerWaitingRoom() {
     <WaitingRoomWrapper>
       <h2>{t('waiting_room')} - {draftId}/player/{playerNum}</h2>
       
-      {/* Debug section - will help identify potential issues */}
-      <div style={{background: '#f5f5f5', border: '1px solid #ddd', padding: '10px', marginBottom: '20px', borderRadius: '5px'}}>
-        <h4>Debug Info:</h4>
-        <ul style={{listStyle: 'none', padding: '0'}}>
-          <li>draftId: {draftId}</li>
-          <li>playerNum: {playerNum}</li>
-          <li>Sessions count: {sessions ? sessions.length : 0}</li>
-          <li>Loading state: {loading ? 'Loading' : 'Complete'}</li>
-          <li>Error state: {error ? error : 'No errors'}</li>
-          <li>API URL: /api/drafts/{draftId}/sessions</li>
-          <li>Ready state: {ready ? 'Ready' : 'Not ready'}</li>
-        </ul>
-      </div>
+
       
       <div>
         <label>
