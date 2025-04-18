@@ -14,7 +14,7 @@ services:
   frontend:
     build: ./frontend 
     ports:
-      - "80:80"
+      - "8081:80" # Changed host port to 8081
     restart: unless-stopped
 
   redis:
