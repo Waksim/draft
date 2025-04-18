@@ -207,7 +207,7 @@
     overflow: hidden;
   }
   .card-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   }
   .card-item {
     width: auto !important;
