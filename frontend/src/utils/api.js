@@ -18,9 +18,15 @@ const createApiUrl = (endpoint) => {
   console.log('createApiUrl - isProd:', isProd, 'endpoint:', endpoint);
   if (isProd) {
     // In production, requests should go to /draft/api/...
-    // Но при этом мы не добавляем /draft/, если он уже есть в URL
-    // Это корректно отработает на сервере с nginx, который снимает /draft/
-    return endpoint;
+    // Не обрабатываем случаи, когда /draft/ уже есть в URL
+    if (endpoint.startsWith('/draft/')) {
+      console.log('URL уже содержит /draft/, оставляем как есть:', endpoint);
+      return endpoint;
+    }
+    // Добавляем /draft/ префикс для всех остальных URL
+    const url = `/draft${endpoint}`;
+    console.log('Добавлен префикс /draft/:', url);
+    return url;
   }
   // In development, requests go to /api/... directly
   return endpoint;
