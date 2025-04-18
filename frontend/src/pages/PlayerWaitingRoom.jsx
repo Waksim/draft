@@ -72,7 +72,7 @@ const WaitingRoomWrapper = styled.div`
   }
 
   .player-name {
-     color: var(--text);
+     color: var(--text) !important;
      font-weight: 600;
      transition: color 0.2s;
    }
