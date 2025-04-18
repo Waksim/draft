@@ -7,6 +7,7 @@ import PlayerList from '../components/PlayerList';
 import './DraftPlay.css';
 
 export default function SpectatorView() {
+  const BASE_URL = import.meta.env.BASE_URL;
   const { draftId } = useParams();
   const { t } = useTranslation();
   const wsRef = useRef(null);
@@ -70,7 +71,7 @@ export default function SpectatorView() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'ban').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -81,7 +82,7 @@ export default function SpectatorView() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'pick').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -94,7 +95,7 @@ export default function SpectatorView() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'ban').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -105,7 +106,7 @@ export default function SpectatorView() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'pick').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -119,7 +120,7 @@ export default function SpectatorView() {
         <ol>
           {history.map((h,i)=>(
             <li key={i} style={{display:'flex',alignItems:'center',gap:8}}>
-              {h.data && h.data.cardId && <img src={`/images/cards/${h.data.cardId}.webp`} alt={h.data.cardName} style={{width:32,height:54,objectFit:'cover',borderRadius:4}} />}
+              {h.data && h.data.cardId && <img src={`${BASE_URL}images/cards/${h.data.cardId}.webp`} alt={h.data.cardName} style={{width:32,height:54,objectFit:'cover',borderRadius:4}} />}
               <span style={{color:h.data && h.data.action==='ban'?'#e53935':undefined,fontWeight:h.data && h.data.action==='ban'?600:400}}>
                 {h.data && h.data.action ? `${h.data.action === 'ban' ? t('ban') : t('pick')}: ` : ''}
                 {h.data && h.data.cardType ? `${h.data.cardType} — ` : ''}

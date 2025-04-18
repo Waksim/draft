@@ -31,6 +31,7 @@ export default function DraftPlay() {
   const [planExpanded, setPlanExpanded] = useState(false);
   const elementIcons = ['anemo','geo','cryo','hydro','dendro','pyro','electro','none'];
   const actionIcons = ['talent','companion','artifact','elemental-resonance','technique','food','location','arcane-legend','item','weapon','combat-action'];
+  const BASE_URL = import.meta.env.BASE_URL;
 
   // Flatten draft plan into steps
   const planSteps = [];
@@ -275,7 +276,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'ban' && h.data.cardType === 'Character').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -286,7 +287,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'ban' && h.data.cardType === 'Action').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -297,7 +298,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'pick' && h.data.cardType === 'Character').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -308,7 +309,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 1 && h.data.action === 'pick' && h.data.cardType === 'Action').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -321,7 +322,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'ban' && h.data.cardType === 'Character').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -332,7 +333,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'ban' && h.data.cardType === 'Action').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image ban"
                 />
@@ -343,7 +344,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'pick' && h.data.cardType === 'Character').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -354,7 +355,7 @@ export default function DraftPlay() {
             {history.filter(h => h.data && h.data.playerNum === 2 && h.data.action === 'pick' && h.data.cardType === 'Action').map((h,i) => (
               <li key={i} className="summary-item">
                 <img
-                  src={`/images/cards/${h.data.cardId}.webp`}
+                  src={`${BASE_URL}images/cards/${h.data.cardId}.webp`}
                   alt={h.data.cardName}
                   className="summary-image pick"
                 />
@@ -418,10 +419,10 @@ export default function DraftPlay() {
             </div>
             <div className="filter-icons">
               {currentBlock.cardType === 'Character' && elementIcons.map(el => (
-                <img key={el} src={`/images/cards/element-icons/${el}.webp`} alt={el} className={`filter-ico${filterTag===el?' selected':''}`} onClick={() => setFilterTag(el)} />
+                <img key={el} src={`${BASE_URL}images/cards/element-icons/${el}.webp`} alt={el} className={`filter-ico${filterTag===el?' selected':''}`} onClick={() => setFilterTag(el)} />
               ))}
               {currentBlock.cardType === 'Action' && actionIcons.map(ac => (
-                <img key={ac} src={`/images/cards/action-type-icons/${ac}.webp`} alt={ac} className={`filter-ico${filterTag===ac?' selected':''}`} onClick={() => setFilterTag(ac)} />
+                <img key={ac} src={`${BASE_URL}images/cards/action-type-icons/${ac}.webp`} alt={ac} className={`filter-ico${filterTag===ac?' selected':''}`} onClick={() => setFilterTag(ac)} />
               ))}
             </div>
           </div>
@@ -480,7 +481,7 @@ export default function DraftPlay() {
                         onClick={()=>handlePickCard(card.id)}
                         disabled={!myTurn}
                       >
-                        <img src={`/images/cards/${card.id}.webp`} alt={card.name_en} className="card-image"/>
+                        <img src={`${BASE_URL}images/cards/${card.id}.webp`} alt={card.name_en} className="card-image"/>
                         <span className="card-title">{card.name_en}</span>
                       </button>
                     </li>
@@ -495,7 +496,7 @@ export default function DraftPlay() {
           <ol className="history-list">
             {history.map((h,i)=>(
               <li key={i} className="history-item">
-                {h.data && h.data.cardId && <img src={`/images/cards/${h.data.cardId}.webp`} alt={h.data.cardName} className="history-image" />}
+                {h.data && h.data.cardId && <img src={`${BASE_URL}images/cards/${h.data.cardId}.webp`} alt={h.data.cardName} className="history-image" />}
                 <span className="history-text">
                   {h.data && h.data.action ? `${h.data.action === 'ban' ? t('ban') : t('pick')}: ` : ''}
                   {h.data && h.data.cardType ? `${h.data.cardType} — ` : ''}
