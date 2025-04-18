@@ -336,9 +336,9 @@ function App() {
           <MainContent>
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/draft/:draftId/player/:playerNum" element={<PlayerWaitingRoom />} />
-              <Route path="/draft/:draftId/play/:playerNum" element={<DraftPlay />} />
-              <Route path="/draft/:draftId/spectator" element={<SpectatorView />} />
+              <Route path="/:draftId/player/:playerNum" element={<PlayerWaitingRoom />} />
+              <Route path="/:draftId/play/:playerNum" element={<DraftPlay />} />
+              <Route path="/:draftId/spectator" element={<SpectatorView />} />
               {/* More pages can be added later */}
             </Routes>
           </MainContent>
