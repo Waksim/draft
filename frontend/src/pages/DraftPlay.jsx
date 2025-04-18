@@ -8,7 +8,7 @@ import './DraftPlay.css';
 
 export default function DraftPlay() {
   // Таймер хода
-  const TURN_LIMIT = 30;
+  const TURN_LIMIT = Infinity;
   const [turnStart, setTurnStart] = useState(Date.now());
   const [turnTime, setTurnTime] = useState(0);
   const [autoPickMsg, setAutoPickMsg] = useState(null);
