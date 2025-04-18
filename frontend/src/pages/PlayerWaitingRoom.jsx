@@ -70,6 +70,12 @@ const WaitingRoomWrapper = styled.div`
     color: #e53935; /* Keep error message red */
     margin-top: 10px;
   }
+
+  .player-name {
+     color: var(--text);
+     font-weight: 600;
+     transition: color 0.2s;
+   }
 `;
 
 export default function PlayerWaitingRoom() {
@@ -192,7 +198,7 @@ export default function PlayerWaitingRoom() {
           {sessions.length > 0 ? (
             sessions.map(s => (
               <li key={s.player_num}>
-                {s.name || `Bunny #${s.player_num}`} — {s.ready ? <span style={{color: 'var(--accent)'}}>{t('ready')}</span> : <span>{t('not_ready')}</span>}
+                <span className="player-name">{s.name || `Bunny #${s.player_num}`}</span> — {s.ready ? <span style={{color: 'var(--accent)'}}>{t('ready')}</span> : <span>{t('not_ready')}</span>}
               </li>
             ))
           ) : (
