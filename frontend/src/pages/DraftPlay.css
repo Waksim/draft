@@ -100,15 +100,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .card-grid {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
@@ -147,6 +139,7 @@
   min-width: 0;
 }
 
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -169,15 +162,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .card-grid {
     grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
@@ -221,6 +206,7 @@
   border-radius: 6px;
   margin-bottom: 4px;
 }
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -243,15 +229,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .card-image {
     width: 50px;
@@ -265,6 +243,7 @@
   text-align: center;
   margin-top: 4px;
 }
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -287,15 +266,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .card-title {
     font-size: 12px;
@@ -384,6 +355,7 @@
   object-fit: cover;
   border-radius: 4px;
 }
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -406,15 +378,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .summary-image {
     width: 30px;
@@ -438,6 +402,7 @@
   margin: 0;
   font-size: 12px;
 }
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -460,15 +425,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .history-list {
     font-size: 11px;
@@ -487,6 +444,7 @@
   border-radius: 3px;
   margin-right: 4px;
 }
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -509,15 +467,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .history-image {
     width: 18px;
@@ -536,6 +486,7 @@
 }
 
 /* Adjustments for smaller mobile screens */
+/* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
   html, body {
     overflow-x: hidden;
@@ -558,15 +509,7 @@
     margin: 0;
     padding: 0;
   }
-  .draft-container {
-    width: 100vw;
-    max-width: 100vw;
-    min-width: 0;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    box-sizing: border-box;
-  }
+
 
   .draft-container {
     margin: 20px auto;
