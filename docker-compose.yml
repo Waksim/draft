@@ -1,26 +1,24 @@
 version: '3.9'
 services:
   backend:
-    build: ./backend
+    build: ./backend 
     ports:
       - "3001:3001"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production # Use production env on server
     volumes:
-      - db_data:/app/data
+      # Bind mount the host file directly into the container
+      - ./backend/database.sqlite:/app/data/database.sqlite
     restart: unless-stopped
+
   frontend:
-    build: ./frontend
+    build: ./frontend 
     ports:
-      - "5173:5173"
-    environment:
-      - NODE_ENV=development
+      - "80:80"
     restart: unless-stopped
+
   redis:
     image: redis:7-alpine
     ports:
       - "6379:6379"
     restart: unless-stopped
-
-volumes:
-  db_data:
