@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { apiGet, apiPost } from '../utils/api';
+import { createWebSocketConnection } from '../utils/websocket';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PlayerList from '../components/PlayerList';
@@ -160,7 +161,7 @@ export default function DraftPlay() {
 
   // WebSocket подключение
   useEffect(() => {
-    wsRef.current = new WebSocket('ws://localhost:3002');
+    wsRef.current = createWebSocketConnection();
     wsRef.current.onopen = () => {
       wsRef.current.send(JSON.stringify({ type: 'subscribe', draftId }));
     };

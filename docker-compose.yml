@@ -4,6 +4,7 @@ services:
     build: ./backend 
     ports:
       - "3001:3001"
+      - "3002:3002" # Expose WebSocket port
     environment:
       - NODE_ENV=production # Use production env on server
     volumes:
