@@ -208,6 +208,22 @@
   }
   .card-grid {
     grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+  .card-item {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .card-button {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
   }
   .card-item {
     width: auto !important;
