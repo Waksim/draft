@@ -232,6 +232,38 @@
     width: auto !important;
   }
 }
+
+/* --- МОБИЛЬНЫЙ ФИКС: предотвращение переполнения карточек --- */
+@media (max-width: 576px) {
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    width: 100vw;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .card-item,
+  .card-button {
+    min-width: 0 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+  .card-button * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .card-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+}
 .card-button.pick {
   border: 1px solid var(--border);
 }
