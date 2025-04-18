@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { apiPost } from '../utils/api';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
@@ -221,13 +222,8 @@ export default function DraftConstructor({ onDraftCreated }) {
   async function createDraft() {
     setLoading(true); setError(null);
     try {
-      const res = await fetch('/api/drafts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ rules: { blocks } })
-      });
-      if (!res.ok) throw new Error(await res.text());
-      const data = await res.json();
+      const res = await apiPost('/api/drafts', { rules: { blocks } });
+      const data = res;
       setLinks(data.links);
       if (onDraftCreated) onDraftCreated(data);
     } catch (e) {

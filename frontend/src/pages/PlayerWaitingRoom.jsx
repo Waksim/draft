@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { apiGet, apiPost } from '../utils/api';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -86,7 +87,7 @@ export default function PlayerWaitingRoom() {
   // Получить статус сессий
   async function fetchSessions() {
     try {
-      const res = await fetch(`/api/drafts/${draftId}/sessions`);
+      const res = await apiGet(`/api/drafts/${draftId}/sessions`);
       const data = await res.json();
       setSessions(data);
       setLoading(false);
@@ -101,22 +102,14 @@ export default function PlayerWaitingRoom() {
 
   // Установить имя игрока
   async function saveName() {
-    await fetch(`/api/drafts/${draftId}/session`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ playerNum: Number(playerNum), name })
-    });
+    await apiPost(`/api/drafts/${draftId}/session`, { playerNum: Number(playerNum), name });
     fetchSessions();
   }
 
   // Установить готовность
   async function setPlayerReadyState(val) {
     setReady(val);
-    await fetch(`/api/drafts/${draftId}/ready`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ playerNum: Number(playerNum), ready: val })
-    });
+    await apiPost(`/api/drafts/${draftId}/ready`, { playerNum: Number(playerNum), ready: val });
     fetchSessions();
   }
 

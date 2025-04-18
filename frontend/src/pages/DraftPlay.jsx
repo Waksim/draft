@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { apiGet, apiPost } from '../utils/api';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import PlayerList from '../components/PlayerList';
@@ -144,13 +145,13 @@ export default function DraftPlay() {
   async function fetchDraftState() {
     try {
       const [draftRes, sessionsRes, historyRes] = await Promise.all([
-        fetch(`/api/drafts/${draftId}`),
-        fetch(`/api/drafts/${draftId}/sessions`),
-        fetch(`/api/drafts/${draftId}/history`),
+        apiGet(`/api/drafts/${draftId}`),
+        apiGet(`/api/drafts/${draftId}/sessions`),
+        apiGet(`/api/drafts/${draftId}/history`),
       ]);
-      setDraft(await draftRes.json());
-      setSessions(await sessionsRes.json());
-      setHistory(await historyRes.json());
+      setDraft(draftRes);
+      setSessions(sessionsRes);
+      setHistory(historyRes);
       setLoading(false);
     } catch (e) {
       setError(e.message);
@@ -446,7 +447,7 @@ export default function DraftPlay() {
                 );
               })}
               <button onClick={async () => {
-                await fetch(`/api/drafts/${draftId}/reset`, { method: 'POST' });
+                await apiPost(`/api/drafts/${draftId}/reset`, {});
                 fetchDraftState();
               }}>Повторить драфты</button>
             </div>
