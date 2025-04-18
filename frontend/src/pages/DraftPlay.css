@@ -69,6 +69,7 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 @media (max-width: 600px) {
   .card-grid {
@@ -78,6 +79,21 @@
 }
 /* Адаптивная сетка для маленьких экранов */
 @media (max-width: 576px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
@@ -132,6 +148,21 @@
 }
 
 @media (max-width: 576px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
@@ -201,6 +232,21 @@
     width: 100vw;
     max-width: 100vw;
     min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
     padding: 0;
     margin: 0;
     border-radius: 0;
@@ -220,6 +266,21 @@
   margin-top: 4px;
 }
 @media (max-width: 576px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
@@ -334,6 +395,21 @@
     width: 100vw;
     max-width: 100vw;
     min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
     padding: 0;
     margin: 0;
     border-radius: 0;
@@ -363,6 +439,21 @@
   font-size: 12px;
 }
 @media (max-width: 576px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
@@ -407,6 +498,21 @@
     width: 100vw;
     max-width: 100vw;
     min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
     padding: 0;
     margin: 0;
     border-radius: 0;
@@ -431,6 +537,21 @@
 
 /* Adjustments for smaller mobile screens */
 @media (max-width: 576px) {
+  html, body {
+    overflow-x: hidden;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  .draft-container {
+    width: 100vw;
+    max-width: 100vw;
+    min-width: 0;
+    padding: 8px;
+    margin: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+  }
   html, body {
     overflow-x: hidden;
     width: 100vw;
