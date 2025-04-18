@@ -1,0 +1,39 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  REGISTRY_IMAGE: $CI_REGISTRY_IMAGE
+
+build_backend:
+  stage: build
+  image: docker:24.0.3
+  services:
+    - docker:24.0.3-dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t "$REGISTRY_IMAGE/backend:latest" -f backend/Dockerfile.prod .
+    - docker push "$REGISTRY_IMAGE/backend:latest"
+
+build_frontend:
+  stage: build
+  image: docker:24.0.3
+  services:
+    - docker:24.0.3-dind
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t "$REGISTRY_IMAGE/frontend:latest" -f frontend/Dockerfile.prod .
+    - docker push "$REGISTRY_IMAGE/frontend:latest"
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  script:
+    - apk add --no-cache openssh-client
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $DEPLOY_HOST >> ~/.ssh/known_hosts
+    - ssh $DEPLOY_USER@$DEPLOY_HOST "docker-compose -f docker-compose.prod.yml pull && docker-compose -f docker-compose.prod.yml up -d --remove-orphans"
+  only:
+    - main

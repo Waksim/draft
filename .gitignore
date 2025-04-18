@@ -1,0 +1,14 @@
+# Node
+node_modules/
+# Backend
+backend/node_modules/
+backend/database.sqlite
+# Frontend
+frontend/node_modules/
+frontend/dist
+# Logs
+*.log
+# Environment
+.env
+# macOS
+.DS_Store

@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  backend:
+    image: ${REGISTRY_IMAGE}/backend:latest
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+
+  frontend:
+    image: ${REGISTRY_IMAGE}/frontend:latest
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

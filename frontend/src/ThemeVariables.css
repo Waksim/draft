@@ -1,0 +1,68 @@
+/* Theme CSS Variables */
+:root {
+  /* Light theme (default) */
+  --background: #f7f9fa;
+  --primary-background: #7680bc;
+  --secondary-background: #ffffff;
+  --hover-background: rgba(118, 128, 188, 0.1);
+  --active-background: rgba(118, 128, 188, 0.2);
+  
+  /* Text colors */
+  --text: #1a1a1a;
+  --primary-text: #ffffff;
+  --secondary-text: #6272a4;
+  --muted-text: #6d7585;
+  
+  /* Table and draft constructor colors */
+  --table-header-background: #e0e4f5;
+  --table-row-background: #ffffff;
+  --table-text-color: #333333;
+  --table-alt-row-background: #f0f2f8;
+  --table-border-color: #c9d0e8;
+  
+  /* UI elements */
+  --border: #e0e3e9;
+  --accent: #7680bc;
+  --accent-light: #8f97c9;
+  --accent-dark: #5c64a0;
+  --button-primary: #7680bc;
+  --button-secondary: #f0f2f5;
+  --button-text: #ffffff;
+  --button-text-secondary: #6272a4;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme variables */
+[data-theme="dark"] {
+  --background: #1a1d2e; /* Lighter dark background */
+  --primary-background: #24283b; /* Adjusted primary background */
+  --secondary-background: #202336; /* Adjusted secondary background */
+  --hover-background: rgba(143, 151, 201, 0.15); /* Adjusted hover using new accent */
+  --active-background: rgba(143, 151, 201, 0.25); /* Adjusted active using new accent */
+  
+  /* Text colors */
+  --text: #e7eaf0;
+  --primary-text: #f1f5f9;
+  --secondary-text: #a8b2d1;
+  --muted-text: #8a92b2;
+  
+  /* Table and draft constructor colors */
+  --table-header-background: #252a43;
+  --table-row-background: #24283b; /* Adjusted table row background */
+  --table-text-color: #e7eaf0;
+  --table-alt-row-background: #2a2e41; /* Adjusted alt table row background */
+  --table-border-color: #343c5c;
+  
+  /* UI elements */
+  --border: #383e5c; /* Adjusted border color */
+  --accent: #8f97c9;
+  --accent-light: #a3a9d2;
+  --accent-dark: #7680bc;
+  --button-primary: #7680bc;
+  --button-secondary: #252a43;
+  --button-text: #f1f5f9;
+  --button-text-secondary: #a8b2d1;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.15);
+}
