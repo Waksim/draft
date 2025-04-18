@@ -171,7 +171,7 @@ export default function PlayerWaitingRoom() {
 
   return (
     <WaitingRoomWrapper>
-      <h2>{t('waiting_room')} - {draftId}/player/{playerNum}</h2>
+      <h2>{t('waiting_room')}</h2>
       
 
       
