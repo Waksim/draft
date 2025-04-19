@@ -486,6 +486,11 @@ export default function DraftPlay() {
                 wsRef.current.send(JSON.stringify({ type: 'request_reset', draftId, from: Number(playerNum) }));
                 setPendingReset({ from: Number(playerNum) });
               }}>Повторить драфты</button>
+              {(pendingReset && pendingReset.from === Number(playerNum) && !showResetModal) && (
+                <div className="reset-request-msg" style={{marginTop:8, color:'#888'}}>
+                  Запрос на повтор драфтов отправлен второму игроку. Ожидание ответа...
+                </div>
+              )}
             </div>
               <Modal
                 open={showResetModal}
