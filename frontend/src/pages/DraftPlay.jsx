@@ -481,7 +481,7 @@ export default function DraftPlay() {
                   </button>
                 );
               })}
-              <button onClick={() => {
+              <button className="btn" onClick={() => {
                 // Инициатор сброса — отправляем запрос через websocket
                 wsRef.current.send(JSON.stringify({ type: 'request_reset', draftId, from: Number(playerNum) }));
                 setPendingReset({ from: Number(playerNum) });
