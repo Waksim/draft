@@ -462,6 +462,7 @@ export default function DraftPlay() {
           {history.length >= planSteps.length ? (
             <div className="draft-finished">
               <h3>Драфты закончены!</h3>
+              <div className="draft-finished-buttons">
               {[Number(playerNum)].map(playerNum => {
                 const session = sessions.find(s => s.player_num === playerNum);
                 const title = session?.name || `${t('player')} ${playerNum}`;
@@ -485,6 +486,7 @@ export default function DraftPlay() {
                 wsRef.current.send(JSON.stringify({ type: 'request_reset', draftId, from: Number(playerNum) }));
                 setPendingReset({ from: Number(playerNum) });
               }}>Повторить драфты</button>
+            </div>
               <Modal
                 open={showResetModal}
                 onConfirm={() => {

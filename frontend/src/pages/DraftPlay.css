@@ -433,6 +433,12 @@
   justify-content: space-between;
   margin-bottom: 12px;
 }
+
+.draft-finished-buttons {
+  display: flex;
+  gap: 12px;
+}
+
 .summary-player {
   display: flex;
   flex-direction: column;
