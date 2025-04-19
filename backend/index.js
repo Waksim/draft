@@ -155,6 +155,8 @@ const wss = new WebSocketServer({ port: 3002 });
 
 // draftId -> Set<ws>
 const draftSubscribers = new Map();
+// draftId -> { from: playerNum }
+const pendingResets = new Map();
 
 wss.on('connection', (ws) => {
   let subscribedDraft = null;
@@ -166,6 +168,44 @@ wss.on('connection', (ws) => {
         if (!draftSubscribers.has(subscribedDraft)) draftSubscribers.set(subscribedDraft, new Set());
         draftSubscribers.get(subscribedDraft).add(ws);
       }
+      // --- RESET FLOW ---
+      if (data.type === 'request_reset' && data.draftId && data.from) {
+        pendingResets.set(data.draftId, { from: data.from });
+        // Broadcast to all subscribers about pending reset
+        if (draftSubscribers.has(data.draftId)) {
+          for (const client of draftSubscribers.get(data.draftId)) {
+            if (client.readyState === 1) {
+              client.send(JSON.stringify({ type: 'pending_reset', from: data.from }));
+            }
+          }
+        }
+      }
+      if (data.type === 'confirm_reset' && data.draftId && data.from) {
+        // Сбросить драфт
+        db.prepare('DELETE FROM draft_history WHERE draft_id = ?').run(data.draftId);
+        pendingResets.delete(data.draftId);
+        // Broadcast reset_confirmed всем
+        if (draftSubscribers.has(data.draftId)) {
+          for (const client of draftSubscribers.get(data.draftId)) {
+            if (client.readyState === 1) {
+              client.send(JSON.stringify({ type: 'reset_confirmed' }));
+              client.send(JSON.stringify({ type: 'draft_update' }));
+            }
+          }
+        }
+      }
+      if (data.type === 'decline_reset' && data.draftId && data.from) {
+        pendingResets.delete(data.draftId);
+        // Broadcast reset_cancel всем
+        if (draftSubscribers.has(data.draftId)) {
+          for (const client of draftSubscribers.get(data.draftId)) {
+            if (client.readyState === 1) {
+              client.send(JSON.stringify({ type: 'reset_cancel' }));
+            }
+          }
+        }
+      }
+      // --- END RESET FLOW ---
       if ((data.type === 'pick' || data.type === 'ban') && data.draftId && typeof data.step === 'number') {
         // Save draft step with full data
         const entry = {

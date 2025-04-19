@@ -6,6 +6,22 @@ import { useTranslation } from 'react-i18next';
 import PlayerList from '../components/PlayerList';
 import './DraftPlay.css';
 
+function Modal({ open, onConfirm, onDecline, children }) {
+  if (!open) return null;
+  return (
+    <div className="modal-overlay">
+      <div className="modal-window">
+        <div className="modal-content">{children}</div>
+        <div className="modal-actions">
+          <button className="btn" onClick={onConfirm}>Да</button>
+          <button className="btn" onClick={onDecline}>Нет</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+
 export default function DraftPlay() {
   // Таймер хода
   const TURN_LIMIT = Infinity;
@@ -29,6 +45,9 @@ export default function DraftPlay() {
   const [filterTag, setFilterTag] = useState(null);
   const [notificationsEnabled, setNotificationsEnabled] = useState(false);
   const [planExpanded, setPlanExpanded] = useState(false);
+  // --- RESET DRAFT STATE ---
+  const [pendingReset, setPendingReset] = useState(null); // {from: playerNum}
+  const [showResetModal, setShowResetModal] = useState(false);
   const elementIcons = ['anemo','geo','cryo','hydro','dendro','pyro','electro','none'];
   const actionIcons = ['talent','companion','artifact','elemental-resonance','technique','food','location','arcane-legend','item','weapon','combat-action'];
   const BASE_URL = import.meta.env.BASE_URL;
@@ -171,11 +190,25 @@ export default function DraftPlay() {
       if (data.type === 'draft_update') {
         fetchDraftState();
       }
+      if (data.type === 'pending_reset') {
+        setPendingReset({ from: data.from });
+        // Если это не я инициировал — показать модалку
+        if (Number(playerNum) !== data.from) setShowResetModal(true);
+      }
+      if (data.type === 'reset_cancel') {
+        setPendingReset(null);
+        setShowResetModal(false);
+      }
+      if (data.type === 'reset_confirmed') {
+        setPendingReset(null);
+        setShowResetModal(false);
+        fetchDraftState();
+      }
     };
     fetchDraftState();
     return () => wsRef.current && wsRef.current.close();
     // eslint-disable-next-line
-  }, [draftId]);
+  }, [draftId, playerNum]);
 
   // Определить чей ход (упрощенно: step % 2 === playerNum-1)
   useEffect(() => {
@@ -447,10 +480,24 @@ export default function DraftPlay() {
                   </button>
                 );
               })}
-              <button onClick={async () => {
-                await apiPost(`/api/drafts/${draftId}/reset`, {});
-                fetchDraftState();
+              <button onClick={() => {
+                // Инициатор сброса — отправляем запрос через websocket
+                wsRef.current.send(JSON.stringify({ type: 'request_reset', draftId, from: Number(playerNum) }));
+                setPendingReset({ from: Number(playerNum) });
               }}>Повторить драфты</button>
+              <Modal
+                open={showResetModal}
+                onConfirm={() => {
+                  wsRef.current.send(JSON.stringify({ type: 'confirm_reset', draftId, from: Number(playerNum) }));
+                  setShowResetModal(false);
+                }}
+                onDecline={() => {
+                  wsRef.current.send(JSON.stringify({ type: 'decline_reset', draftId, from: Number(playerNum) }));
+                  setShowResetModal(false);
+                }}
+              >
+                Повторить драфты? Второй игрок запросил сброс. Начать заново?
+              </Modal>
             </div>
           ) : availableCards.length === 0 ? (
             <div className="no-cards">{t('no_cards')}</div>
